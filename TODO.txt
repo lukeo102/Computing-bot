@@ -1,0 +1,25 @@
+json:
+    transfer json file to database
+
+!verify:
+    auth with uni email, either login and link or send an email with a code
+    
+!music:
+    !music pause:
+        pause playback
+
+    !music play:
+        resume playback
+
+    !music add:
+        add a song to the queue
+        support for spotify, youtube and maybe others
+
+    !music skip:
+        start a vote to skip the song
+
+    !music remove:
+        either user that added the song or 
+
+    !music queue:
+        show the music queue
