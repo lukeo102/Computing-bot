@@ -1,7 +1,8 @@
 import queue
 import nextcord
 from nextcord.ext import commands
-from log import Log
+from src.verify_command import verify_command
+from src.log import Log
 
 song_queue = queue.Queue
 

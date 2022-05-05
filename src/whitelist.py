@@ -1,8 +1,8 @@
 import json
 from nextcord.ext import commands
 from mctools import RCONClient
-from bot import verify_command
-from log import Log
+from src.verify_command import verify_command
+from src.log import Log
 import requests
 
 class Whitelist:
@@ -83,9 +83,9 @@ async def whitelist_start(ctx: commands.context.Context, log: Log):
 
         reply_message = await ctx.send("Working")
 
-        error = verify_command(ctx=ctx, role_allowed='PISS', no_parameters=1, command="whitelist")
+        error = verify_command(ctx=ctx, role_allowed='PISS', no_parameters=1, command="whitelist", log=log)
         if error:
-            reply_message.edit(error)
+            await reply_message.edit(error)
             return
 
         username = ctx.message.content.split()[1]
@@ -138,3 +138,4 @@ async def whitelist_start(ctx: commands.context.Context, log: Log):
 
     except Exception as e:
         log.append_log(e)
+        await reply_message.edit(f'Fatal Error Occured: {e}')
