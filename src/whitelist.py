@@ -86,6 +86,7 @@ async def whitelist_start(ctx: commands.context.Context, log: Log):
         error = verify_command(ctx=ctx, role_allowed='PISS', no_parameters=1, command="whitelist", log=log)
         if error:
             await reply_message.edit(error)
+            await ctx.message.add_reaction('\N{THUMBS DOWN SIGN}')
             return
 
         username = ctx.message.content.split()[1]
