@@ -19,9 +19,10 @@ class Whitelist:
         print(feedback)
         return feedback
 
-    def check_on_whitelist(self, username: str): # Working, given userdata.json is not empty
-        with open("userdata.json", encoding="utf-8") as file:
-            userdata = json.load(file)
+    def check_on_whitelist(self, username: str): # Working, given data.json is not empty
+        with open("data.json", encoding="utf-8") as file:
+            data = json.load(file)
+            userdata = data["whitelist"]
 
         musers = userdata['discord-to-minecraft'].values()
 
@@ -42,8 +43,9 @@ class Whitelist:
 
     def one_uname_one_user(self, duname):
 
-        with open("userdata.json", encoding="utf-8") as file:
-            userdata = json.load(file)
+        with open("data.json", encoding="utf-8") as file:
+            data = json.load(file)
+            userdata = data["whitelist"]
 
         flag = False
         dusers = [*userdata['discord-to-minecraft']]
@@ -51,20 +53,23 @@ class Whitelist:
             self.whitelist_add_remove(userdata['discord-to-minecraft'].pop(duname), False)
             flag = True
 
-        # Updating userdata.json
-        with open("userdata.json", 'w', encoding="utf-8") as file:
-            json.dump(userdata, file, indent=4)
+        # Updating data.json
+        with open("data.json", 'w', encoding="utf-8") as file:
+            data["whitelist"] = userdata
+            json.dump(data, file, indent=4)
 
         return flag
 
     def update_json(self, discord, minecraft):
-        with open("userdata.json", 'r', encoding="utf-8") as file:
-            userdata = json.load(file)
+        with open("data.json", 'r', encoding="utf-8") as file:
+            data = json.load(file)
+            userdata = data["whitelist"]
 
         userdata['discord-to-minecraft'][discord] = minecraft
 
-        with open("userdata.json", 'w', encoding="utf-8") as file:
-            json.dump(userdata, file, indent=4)
+        with open("data.json", 'w', encoding="utf-8") as file:
+            data["whitelist"] = userdata
+            json.dump(data, file, indent=4)
 
 async def whitelist_start(ctx: commands.context.Context, log: Log):
     #
