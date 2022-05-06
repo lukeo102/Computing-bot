@@ -23,3 +23,9 @@ json:
 
     !music queue:
         show the music queue
+
+log.py:
+    maybe try and make it thread safe (unclear at this time if it is, testing needed), ideas:
+        a thread safe queue system
+        modify append_log() to make a call to an API to that actually appends the log
+            it would need to call the API and NOT wait for a response

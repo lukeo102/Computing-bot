@@ -1,8 +1,8 @@
 import json
 from nextcord.ext import commands
 from mctools import RCONClient
-from src.verify_command import verify_command
-from src.log import Log
+from source.verify_command import verify_command
+from source.log import Log
 import requests
 
 class Whitelist:

@@ -1,7 +1,7 @@
 import os
 import nextcord
 from nextcord.ext import commands
-from src import log as Log, whitelist as whitelist_, timeout as timeout_, verify as verify_, music as music_
+from source import log as Log, whitelist as whitelist_, timeout as timeout_, verify as verify_, music as music_
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)

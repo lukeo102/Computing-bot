@@ -1,6 +1,6 @@
 import nextcord
 from nextcord.ext import commands
-import src.log as log
+import source.log as log
 
 def verify_command(ctx: commands.context.Context, no_parameters: int, role_allowed: str, command: str, log: log.Log):
 

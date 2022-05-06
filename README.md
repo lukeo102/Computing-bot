@@ -1,0 +1,1 @@
+This is a Discord bot project for the first year Computing Science Discord server for the University of Glasgow
