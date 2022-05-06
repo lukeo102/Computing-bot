@@ -1,4 +1,4 @@
-import json
+import json, os, sys
 from nextcord.ext import commands
 from mctools import RCONClient
 from source.verify_command import verify_command
@@ -143,5 +143,8 @@ async def whitelist_start(ctx: commands.context.Context, log: Log):
         await ctx.author.send(f'Failed to add {username} to the whitelist')
 
     except Exception as e:
-        log.append_log(e)
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        log.append_log(f"File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
+        await reply_message.edit(f'Fatal Error Occured: {e}')
         await reply_message.edit(f'Fatal Error Occured: {e}')

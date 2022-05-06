@@ -1,3 +1,4 @@
+import os, sys
 import datetime
 import nextcord
 from nextcord.ext import commands
@@ -60,5 +61,7 @@ async def timeout_start(ctx: commands.context.Context, log: Log):
         log.append_log("[Timeout] Timeout complete")
         await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
     except Exception as e:
-        log.append_log(f'[Timeout] {e}')
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        log.append_log(f"File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
         await reply_message.edit(f'Fatal Error Occured: {e}')
