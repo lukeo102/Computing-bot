@@ -32,6 +32,7 @@ async def whitelist(ctx: commands.context.Context, author: str = ""):
     
 @bot.command(name='music', help='Format: !whitelist [username]')
 async def music(ctx: commands.context.Context, author: str = ""):
+    pass
     await music_.music_start(ctx=ctx, log=log)
 
 log.append_log("Starting!")

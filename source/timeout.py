@@ -60,8 +60,10 @@ async def timeout_start(ctx: commands.context.Context, log: Log):
         reply_message.edit(f"Timed out users will be timed out until {timeout_expire.strftime('%H:%M %Y-%m-%d')}")
         log.append_log("[Timeout] Timeout complete")
         await ctx.message.add_reaction('\N{THUMBS UP SIGN}')
+        
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        log.append_log(f"File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
+        err_name = str(type(e)).split()[1].strip("> '")
+        log.append_log(f"{err_name}: File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
         await reply_message.edit(f'Fatal Error Occured: {e}')

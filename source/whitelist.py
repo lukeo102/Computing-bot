@@ -145,6 +145,7 @@ async def whitelist_start(ctx: commands.context.Context, log: Log):
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        log.append_log(f"File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
+        err_name = str(type(e)).split()[1].strip("> '")
+        log.append_log(f"{err_name}: File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
         await reply_message.edit(f'Fatal Error Occured: {e}')
         await reply_message.edit(f'Fatal Error Occured: {e}')
