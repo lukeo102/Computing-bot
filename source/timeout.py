@@ -127,18 +127,21 @@ async def timeout2_start(interaction: nextcord.Interaction, role: str, time: str
 
         failed_timeout = []
         timeout_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=time)
+        timeout_count_success = 0
 
         for member in members:
             try:
                 await member.timeout(timeout_expire)
+                timeout_count_success += 1
 
             except Exception as e:
                 log.append_log(f"[Timeout] Failed to timeout user {member}, reason: {e}")
                 failed_timeout.append(member)
 
-        reply_message.append(f"Timed out users are timed out until {timeout_expire.strftime('%H:%M %Y-%m-%d')}")
+        reply_message.append(f"Timed out {timeout_count_success} users until {timeout_expire.strftime('%H:%M %Y-%m-%d')}")
         if len(failed_timeout) > 0:
-            reply_message.append("RuhRoh. Failed to time out user(s):\n" + '\n'.join([member.name for member in failed_timeout]))
+            timeout_count_fail = len(failed_timeout)
+            reply_message.append(f"RuhRoh. Failed to time out {timeout_count_fail} user(s):\n" + '\n'.join([member.name for member in failed_timeout]))
 
         log.append_log("[Timeout] Timeout complete")
         await interaction.followup.send("\n".join(reply_message))
