@@ -1,9 +1,15 @@
 
-import sys, os
-try:
-    raise NameError
-except Exception as e:
-    exc_type, exc_obj, exc_tb = sys.exc_info()
-    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-    err_name = str(type(e)).split()[1].strip("> '")
-    log.append_log(f"{err_name}: File: {fname}, Line: {exc_tb.tb_lineno}, Error: {e}")
+store = store
+current_element = p
+flag = True
+total = 0
+
+while True:
+    if store in current_element.account_id:
+        total = total + current_element.value
+    
+    if current_element.next == None:
+        break
+    
+    current_element = current_element.next
+        

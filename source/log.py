@@ -12,9 +12,9 @@ class Log:
         self.file = open(f'{self.dir}{self.day}.log', 'a', encoding="utf-8")
         self.days_to_keep = days_to_keep
         self.append_log('Start of log')
+        
 
-
-    def reset_file(self):
+    def reset_file(self): # Resets the log file for a new day
         self.file.write('Log roll over')
         self.file.flush()
         fsync(self.file.fileno())
@@ -27,18 +27,17 @@ class Log:
 
 
     def append_log(self, message, console=True):
-        if self.day == date.today().strftime('%Y-%m-%d'):
-            time = datetime.now().strftime('%H:%M:%S')
-            message = f'[{time}] {message}\n'
-            if console:
-                print(message[:-1])
-
-            self.file.write(message)
-            self.file.flush()
-            fsync(self.file.fileno())
-
-        else:
+        if self.day != date.today().strftime('%Y-%m-%d'): # Check whether log roll over is required
             self.reset_file()
+            
+        time = datetime.now().strftime('%H:%M:%S')
+        message = f'[{time}] {message}\n'
+        if console:
+            print(message[:-1])
+
+        self.file.write(message)
+        self.file.flush()
+        fsync(self.file.fileno())
 
 
     def remove_old_log(self, days_old = 14):

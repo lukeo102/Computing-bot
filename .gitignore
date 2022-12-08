@@ -1,5 +1,5 @@
-/.vscode
-/log
-/token
-/data.json
-*pycache*
+.vscode
+*log
+*token*
+data.json
+*__pycache__*
