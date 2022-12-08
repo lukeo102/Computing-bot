@@ -91,7 +91,7 @@ async def timeout2_start(interaction: nextcord.Interaction, role: str, time: str
 
         log.append_log(f"[Timeout] Timeout command received. Initiated by {interaction.user.display_name} (id: {interaction.user.id})")
         error = verify_command(interaction=interaction, role_allowed='mods', command="timeout", log=log)
-        error = False
+        
         if error:
             await interaction.followup.send(error)
             return
@@ -128,7 +128,6 @@ async def timeout2_start(interaction: nextcord.Interaction, role: str, time: str
         failed_timeout = []
         timeout_expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=time)
         timeout_count_success = 0
-
 
         for member in members:
             try:
